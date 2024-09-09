@@ -206,7 +206,6 @@ int lecallback(int clientnode,int op,int cticn)
   {
   int n;
   static char hello[8] = { "Hello\n"};  // \n = Enter
-        
   if(op == LE_CONNECT)
     {
     printf("Connected OK. Key presses sent to client. ESC stops server\n");
@@ -218,16 +217,13 @@ int lecallback(int clientnode,int op,int cticn)
     if(cticn == 23)
       {    // 23 = btferret custom code for F10
       //trigger device switch
-      printf("F10 pressed. Triggering device switch to clientnode 1000...\n");
+      printf("F10 pressed. Triggering device switch to clientnode %d...\n", 1000);
       user_function(1000,0,0,0,NULL,NULL); //assign any non-zero int, doesn't affect assigned clientnode value  
-      /**** battery level ****/
-      //  if(battery[0] > 0)
-      //    --battery[0];
-      //  uuid[0] = 0x2A;
-      //  uuid[1] = 0x19;
-      //  write_ctic(localnode(),find_ctic_index(localnode(),UUID_2,uuid),battery,1);
-      /*******************/
       }
+    else if(cticn == 22){
+      printf("F9 pressed. Triggering device switch to clientnode %d...\n", 1001);
+      user_function(1001,0,0,0,NULL,NULL); //assign any non-zero int, doesn't affect assigned clientnode value  
+    }
     else  
       send_key(cticn);      
  
